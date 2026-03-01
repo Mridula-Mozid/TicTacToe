@@ -1,0 +1,102 @@
+#psuedocode:
+'''
+board = [3][3]
+if(int i = 1; i< 9; i++){
+  if i is odd:
+    check if
+
+    board[[1] and board[2] and board[3] == x or
+    board[[4] and board[5] and board[6] == x or
+    board[[7] and board[8] and board[9] == x or
+    board[[1] and board[4] and board[7] == x or
+    board[[2] and board[5] and board[8] == x or
+    board[[3] and board[6] and board[9] == x or
+    board[[1] and board[5] and board[9] == x or
+    board[[3] and board[5] and board[7] == x
+
+    print (f{player 01} wins)
+
+    elif
+      board[[1] and board[2] and board[3] == 0 or
+    board[[4] and board[5] and board[6] == 0 or
+    board[[7] and board[8] and board[9] == 0 or
+    board[[1] and board[4] and board[7] == 0 or
+    board[[2] and board[5] and board[8] == 0 or
+    board[[3] and board[6] and board[9] == 0 or
+    board[[1] and board[5] and board[9] == 0 or
+    board[[3] and board[5] and board[7] == 0
+
+    rint (f{player 02} wins)
+    else
+            position = input("Enter your position player 01:")
+            if board[][] is empty
+              board[][] = X
+              print
+            1  | 2 | 3
+            ----|---|---
+            4  | X | 6
+            ----|---|---
+            7  | 8 | 9
+
+          else
+            it is occupied.
+            i--
+
+
+
+   elif i is even:
+    check if
+
+    board[[1] and board[2] and board[3] == x or
+    board[[4] and board[5] and board[6] == x or
+    board[[7] and board[8] and board[9] == x or
+    board[[1] and board[4] and board[7] == x or
+    board[[2] and board[5] and board[8] == x or
+    board[[3] and board[6] and board[9] == x or
+    board[[1] and board[5] and board[9] == x or
+    board[[3] and board[5] and board[7] == x
+
+    rint (f{player 01} wins)
+
+    elif
+      board[[1] and board[2] and board[3] == 0 or
+    board[[4] and board[5] and board[6] == 0 or
+    board[[7] and board[8] and board[9] == 0 or
+    board[[1] and board[4] and board[7] == 0 or
+    board[[2] and board[5] and board[8] == 0 or
+    board[[3] and board[6] and board[9] == 0 or
+    board[[1] and board[5] and board[9] == 0 or
+    board[[3] and board[5] and board[7] == 0
+    rint (f{player 02} wins)
+    else:
+
+    position = input("Enter your position player 02:")
+     if board[][] is empty
+    board[][] = 0
+    print
+   1  | 2 | 3
+  ----|---|---
+   4  | X | 6
+  ----|---|---
+   7  | 8 | 0
+
+   else
+    it is occupied.
+    i--
+
+        else:
+      error try again. only enter 1-9 whuich are not occupied position.
+      i--
+
+    when i > 9
+    it is a tie.
+    quit()
+
+}
+
+
+
+'''
+
+
+
