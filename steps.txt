@@ -27,3 +27,4 @@ calculation logic:
 4. If at the end of the traversal it doesnot find a win-worthy index option, then it'll choose a random index for that round
 
 Version 1.3 (computer vs human - DIFFICULT)
+1. Apply min-max or alphabeta pruning (whiever is more efficient and better win probability)
