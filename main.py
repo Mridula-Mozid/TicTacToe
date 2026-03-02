@@ -27,9 +27,20 @@ So without further ado, let's start.
 
   """
 
+
+
 board = ['1', '2', '3', 
          '4', '5', '6',
          '7', '8', '9']
+
+
+def print_board():
+    print(f"""
+ {board[0]} | {board[1]} | {board[2]}
+---|---|---
+ {board[3]} | {board[4]} | {board[5]}
+---|---|---
+ {board[6]} | {board[7]} | {board[8]}""")
 
 
 def main():
@@ -46,31 +57,31 @@ def main():
   current_symbol = 'X'
   
 
-  for i in range(1,9):
+  i = 1
+  while i <= 9:
     if i % 2 != 0:
       digit = int(input(f"{current_player}({current_symbol}) enter your position: "))
-      if board[digit] != 'X' or 'O' and digit <= 9 and digit != 0:
+      if digit > 0 and digit <= 9 and board[digit-1] != 'X' and board[digit-1] != 'O':
         board[digit-1] = 'X'
-        print(board)
+        print_board()
         current_player = player02
         current_symbol = 'O'
+        i += 1
       else:
          print("Your input is invalid. Please enter unoccupied digits from 1 through 9")
-         i = i-1
+         i -= 1
 
-    elif i % 2 == 0:
+    else:
       digit = int(input(f"{current_player}({current_symbol}) enter your position: "))
-      if board[digit] != 'X' or 'O' and digit <= 9:
+      if digit > 0 and digit <= 9 and board[digit-1] != 'X' and board[digit-1] != 'O':
         board[digit-1] = 'O'
-        print(board)
+        print_board()
         current_player = player01
         current_symbol = 'X'
+        i += 1
       else:
          print("Your input is invalid. Please enter unoccupied digits from 1 through 9 ONLY")
-         i = i-1
-    
-    else:
-      print("Your input is invalid. Please enter unoccupied digits from 1 through 9")
+         i -= 1
 
 main()
 
