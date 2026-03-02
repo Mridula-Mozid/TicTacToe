@@ -69,7 +69,7 @@ def main():
         i += 1
       else:
          print("Your input is invalid. Please enter unoccupied digits from 1 through 9")
-         i -= 1
+         
 
     else:
       digit = int(input(f"{current_player}({current_symbol}) enter your position: "))
@@ -81,7 +81,7 @@ def main():
         i += 1
       else:
          print("Your input is invalid. Please enter unoccupied digits from 1 through 9 ONLY")
-         i -= 1
+         
 
 main()
 
