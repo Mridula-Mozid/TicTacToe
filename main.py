@@ -33,7 +33,8 @@ def print_board():
  {board[6]} | {board[7]} | {board[8]}""")
 
 
-def check_winner(player_name, symbol):
+def check_winner(player_name, symbol, check_only=False):
+    is_winner = False
     if (board[0] == board[1] == board[2] == symbol) or \
        (board[3] == board[4] == board[5] == symbol) or \
        (board[6] == board[7] == board[8] == symbol) or \
@@ -42,9 +43,14 @@ def check_winner(player_name, symbol):
        (board[2] == board[5] == board[8] == symbol) or \
        (board[0] == board[4] == board[8] == symbol) or \
        (board[2] == board[4] == board[6] == symbol):
+        is_winner = True
+    
+    if is_winner and not check_only:
         print(f"Congratulation! {player_name} WON!!!")
+        input("Press Enter to exit...")
         quit()
-    return False
+        
+    return is_winner
 
 
 def main():
@@ -119,7 +125,7 @@ def main():
                     if digit > 0 and digit <= 9 and board[digit-1] != 'X' and board[digit-1] != 'O':
                         board[digit-1] = 'X'
                         print_board()
-                        check_winner(current_player, current_symbol)
+                        check_winner(current_player, 'X')
                         current_player = "Computer"
                         current_symbol = 'O'
                         i += 1
@@ -128,11 +134,11 @@ def main():
 
                 else:
                     index = random.randint(1, 9)
-                    if index > 0 and index <= 9 and board[index-1] != 'X' and board[index-1] != 'O':
-                        print(f"Computer chooses position {index-1}")
+                    if index > 0 and index <= 9 and board[index-1] not in ['X', 'O']:
+                        print(f"Computer chooses position {index}")
                         board[index-1] = 'O'
                         print_board()
-                        check_winner(current_player, current_symbol)
+                        check_winner(current_player, 'O')
                         current_player = player01
                         current_symbol = 'X'
                         i += 1 
@@ -145,7 +151,62 @@ def main():
 
           elif difficulty == 2:
               print("You have selected Medium mode.")
+
+              player01 = input("Enter player name: ")
+              print(f"Welcome {player01}. You are playing against the computer. \nYou are X and the computer is O.")
+              print(instuctions)
+
+              current_player = player01
+              current_symbol = 'X'
+
+              i = 1
+              while i<=9:
+                if i % 2 != 0:
+                    digit = int(input(f"{current_player}({current_symbol}) enter your position: "))
+
+                    if digit > 0 and digit <= 9 and board[digit-1] != 'X' and board[digit-1] != 'O':
+                        board[digit-1] = 'X'
+                        print_board()
+                        check_winner(current_player, current_symbol)
+                        current_player = "Computer"
+                        current_symbol = 'O'
+                        i += 1
+                    else:
+                        print("Your input is invalid. Please enter unoccupied digits from 1 through 9")
+
+                else:
+                    # Find all empty spots
+                    empty_spots = [idx for idx, val in enumerate(board) if val not in ['X', 'O']]
+                    move_index = -1
+
+                    # 1. Check if computer can win
+                    for idx in empty_spots:
+                        board[idx] = 'O'
+                        if check_winner("Computer", 'O', check_only=True):
+                            move_index = idx # Found winning move
+                            board[idx] = str(idx + 1) # Reset board
+                            break
+                        board[idx] = str(idx + 1) # Reset board
+
+                    # 2. If no winning move, pick random from empty spots
+                    if move_index == -1:
+                        move_index = random.choice(empty_spots)
+                    
+                    # 3. Apply the move
+                    board[move_index] = 'O'
+                    print(f"Computer chooses position {move_index + 1}")
+                    print_board()
+                    check_winner("Computer", 'O')
+                    
+                    current_player = player01
+                    current_symbol = 'X'
+                    i += 1 
+              
+              print("It's a draw!!!")
+              input("Press Enter to exit!")
               break
+
+              
           elif difficulty == 3:
               print("You have selected Hard mode.")
               break
