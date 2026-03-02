@@ -45,7 +45,7 @@ def check_winner(player_name, symbol, check_only=False):
        (board[2] == board[4] == board[6] == symbol):
         is_winner = True
     
-    if is_winner and not check_only:
+    if is_winner == True and check_only == False:
         print(f"Congratulation! {player_name} WON!!!")
         input("Press Enter to exit...")
         quit()
@@ -171,36 +171,44 @@ def main():
                         current_player = "Computer"
                         current_symbol = 'O'
                         i += 1
+                        search = True
                     else:
                         print("Your input is invalid. Please enter unoccupied digits from 1 through 9")
 
                 else:
-                    # Find all empty spots
-                    empty_spots = [idx for idx, val in enumerate(board) if val not in ['X', 'O']]
-                    move_index = -1
-
-                    # 1. Check if computer can win
-                    for idx in empty_spots:
-                        board[idx] = 'O'
-                        if check_winner("Computer", 'O', check_only=True):
-                            move_index = idx # Found winning move
-                            board[idx] = str(idx + 1) # Reset board
-                            break
-                        board[idx] = str(idx + 1) # Reset board
-
-                    # 2. If no winning move, pick random from empty spots
-                    if move_index == -1:
-                        move_index = random.choice(empty_spots)
-                    
-                    # 3. Apply the move
-                    board[move_index] = 'O'
-                    print(f"Computer chooses position {move_index + 1}")
-                    print_board()
-                    check_winner("Computer", 'O')
-                    
-                    current_player = player01
-                    current_symbol = 'X'
-                    i += 1 
+                    while search:
+                      for item in board:
+                          i=1
+                          while i <= 9:
+                              check_winner("Computer", 'O', check_only=True)
+                              if check_winner("Computer", 'O', check_only=True) == True:
+                                  index = board.index(item)
+                                  print(f"Computer chooses position {index+1}")
+                                  board[index] = 'O'
+                                  print_board()
+                                  check_winner(current_player, 'O')
+                                  current_player = player01
+                                  current_symbol = 'X'
+                                  i += 1 
+                                  
+                                  break
+                              
+                              else:
+                                  continue
+  
+                            
+                      while i == 10:
+                          index = random.randint(1, 9)
+                          if index > 0 and index <= 9 and board[index-1] not in ['X', 'O']:
+                              print(f"Computer chooses position {index}")
+                              board[index-1] = 'O'
+                              print_board()
+                              check_winner(current_player, 'O')
+                              current_player = player01
+                              current_symbol = 'X'
+                              i += 1 
+                          else:
+                              continue
               
               print("It's a draw!!!")
               input("Press Enter to exit!")
