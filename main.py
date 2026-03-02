@@ -3,11 +3,11 @@
 #3. Give instructions & the board x
 #4. Start the game x
 #5. Give instructions accordingly & player 01 will move first x
-#6. place the position and show the board 
+#6. place the position and show the board x
 #7. player 02 will move next x
-#8. make sure the position is empty 
-#9. place the position and show the board
-#10. check for win or draw & repeat or end the game
+#8. make sure the position is empty x
+#9. place the position and show the board x
+#10. check for win or draw & repeat or end the game x
 
 instuctions = """
 
@@ -43,6 +43,20 @@ def print_board():
  {board[6]} | {board[7]} | {board[8]}""")
 
 
+def check_winner(player_name, symbol):
+    if (board[0] == board[1] == board[2] == symbol) or \
+       (board[3] == board[4] == board[5] == symbol) or \
+       (board[6] == board[7] == board[8] == symbol) or \
+       (board[0] == board[3] == board[6] == symbol) or \
+       (board[1] == board[4] == board[7] == symbol) or \
+       (board[2] == board[5] == board[8] == symbol) or \
+       (board[0] == board[4] == board[8] == symbol) or \
+       (board[2] == board[4] == board[6] == symbol):
+        print(f"Congratulation! {player_name} WON!!!")
+        quit()
+    return False
+
+
 def main():
   print("Welcome to The Tic-Tac-Toe Game!")
   player01 = input("Enter player 01 name: ")
@@ -64,6 +78,7 @@ def main():
       if digit > 0 and digit <= 9 and board[digit-1] != 'X' and board[digit-1] != 'O':
         board[digit-1] = 'X'
         print_board()
+        check_winner(current_player, 'X')
         current_player = player02
         current_symbol = 'O'
         i += 1
@@ -76,13 +91,14 @@ def main():
       if digit > 0 and digit <= 9 and board[digit-1] != 'X' and board[digit-1] != 'O':
         board[digit-1] = 'O'
         print_board()
+        check_winner(current_player, 'O')
         current_player = player01
         current_symbol = 'X'
         i += 1
       else:
          print("Your input is invalid. Please enter unoccupied digits from 1 through 9 ONLY")
-         
-
+  print("It's a draw!!!")
+  input("Press Enter to exit!")
 main()
 
 
