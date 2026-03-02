@@ -1,3 +1,6 @@
+import random
+
+
 instuctions = """
 
    1  | 2 | 3
@@ -15,8 +18,6 @@ Enter the assigned placeholder number of the place, where you want to put the si
 So without further ado, let's start.
 
   """
-
-
 
 board = ['1', '2', '3', 
          '4', '5', '6',
@@ -47,47 +48,110 @@ def check_winner(player_name, symbol):
 
 
 def main():
-  print("Welcome to The Tic-Tac-Toe Game!")
-  player01 = input("Enter player 01 name: ")
-  player02 = input("Enter player 02 name: ")
+    print("Welcome to The Tic-Tac-Toe Game!")
+    preference = input("Do you want to play against a human or computer? Type 'human' or 'computer': ")
+    
+    if preference.lower() == 'human':
+        print("Welcome to the human vs human Mode! ")
+        player01 = input("Enter player 01 name: ")
+        player02 = input("Enter player 02 name: ")
 
-  print(f"\nWelcome {player01} & {player02}")
-  print(f"{player01} is X AND {player02} is O")
+        print(f"\nWelcome {player01} & {player02}")
+        print(f"{player01} is X AND {player02} is O")
 
-  print(instuctions)
+        print(instuctions)
 
-  current_player = player01
-  current_symbol = 'X'
-  
-
-  i = 1
-  while i <= 9:
-    if i % 2 != 0:
-      digit = int(input(f"{current_player}({current_symbol}) enter your position: "))
-      if digit > 0 and digit <= 9 and board[digit-1] != 'X' and board[digit-1] != 'O':
-        board[digit-1] = 'X'
-        print_board()
-        check_winner(current_player, 'X')
-        current_player = player02
-        current_symbol = 'O'
-        i += 1
-      else:
-         print("Your input is invalid. Please enter unoccupied digits from 1 through 9")
-         
-
-    else:
-      digit = int(input(f"{current_player}({current_symbol}) enter your position: "))
-      if digit > 0 and digit <= 9 and board[digit-1] != 'X' and board[digit-1] != 'O':
-        board[digit-1] = 'O'
-        print_board()
-        check_winner(current_player, 'O')
         current_player = player01
         current_symbol = 'X'
-        i += 1
-      else:
-         print("Your input is invalid. Please enter unoccupied digits from 1 through 9 ONLY")
-  print("It's a draw!!!")
-  input("Press Enter to exit!")
+
+        i = 1
+        while i <= 9:
+            if i % 2 != 0:
+                digit = int(input(f"{current_player}({current_symbol}) enter your position: "))
+                if digit > 0 and digit <= 9 and board[digit-1] != 'X' and board[digit-1] != 'O':
+                    board[digit-1] = 'X'
+                    print_board()
+                    check_winner(current_player, current_symbol)
+                    current_player = player02
+                    current_symbol = 'O'
+                    i += 1
+                else:
+                    print("Your input is invalid. Please enter unoccupied digits from 1 through 9")
+
+            else:
+                digit = int(input(f"{current_player}({current_symbol}) enter your position: "))
+                if digit > 0 and digit <= 9 and board[digit-1] != 'X' and board[digit-1] != 'O':
+                    board[digit-1] = 'O'
+                    print_board()
+                    check_winner(current_player, current_symbol)
+                    current_player = player01
+                    current_symbol = 'X'
+                    i += 1
+                else:
+                    print("Your input is invalid. Please enter unoccupied digits from 1 through 9 ONLY")
+        
+        print("It's a draw!!!")
+        input("Press Enter to exit!")
+    
+    else:
+        print("Welcome to the Computer Mode! ")
+        difficulty = int(input("Choose your difficulty level:\n" \
+        "1. Easy (Enter 1)\n" \
+        "2. Medium (Enter 2)\n" \
+        "3. Hard (Enter 3): \n"))
+        
+        while difficulty > 0 and difficulty < 4: 
+          if difficulty == 1:
+              print("You have selected Easy mode.")
+
+              player01 = input("Enter player name: ")
+              print(f"Welcome {player01}. You are playing against the computer. \nYou are X and the computer is O.")
+              print(instuctions)
+
+              current_player = player01
+              current_symbol = 'X'
+
+              i = 1
+              while i<=9:
+                if i % 2 != 0:
+                    digit = int(input(f"{current_player}({current_symbol}) enter your position: "))
+
+                    if digit > 0 and digit <= 9 and board[digit-1] != 'X' and board[digit-1] != 'O':
+                        board[digit-1] = 'X'
+                        print_board()
+                        check_winner(current_player, current_symbol)
+                        current_player = "Computer"
+                        current_symbol = 'O'
+                        i += 1
+                    else:
+                        print("Your input is invalid. Please enter unoccupied digits from 1 through 9")
+
+                else:
+                    index = random.randint(1, 9)
+                    if index > 0 and index <= 9 and board[index-1] != 'X' and board[index-1] != 'O':
+                        print(f"Computer chooses position {index-1}")
+                        board[index-1] = 'O'
+                        print_board()
+                        check_winner(current_player, current_symbol)
+                        current_player = player01
+                        current_symbol = 'X'
+                        i += 1 
+                    else:
+                        continue
+              
+              print("It's a draw!!!")
+              input("Press Enter to exit!")
+              break
+
+          elif difficulty == 2:
+              print("You have selected Medium mode.")
+              break
+          elif difficulty == 3:
+              print("You have selected Hard mode.")
+              break
+        else:
+          print("Invalid input. Please enter 1, 2, or 3.")
+
 main()
 
 
