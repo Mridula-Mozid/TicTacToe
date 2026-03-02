@@ -1,14 +1,3 @@
-# 1. Enter player names x
-#2. Assign signs x
-#3. Give instructions & the board x
-#4. Start the game x
-#5. Give instructions accordingly & player 01 will move first x
-#6. place the position and show the board x
-#7. player 02 will move next x
-#8. make sure the position is empty x
-#9. place the position and show the board x
-#10. check for win or draw & repeat or end the game x
-
 instuctions = """
 
    1  | 2 | 3
