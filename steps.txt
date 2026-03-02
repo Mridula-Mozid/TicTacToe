@@ -11,5 +11,10 @@ Version 1.0 (basic human vs human):
 10. check for win or draw & repeat or end the game x
 
 Version 1.1 (computer vs human - EASY)
+1. Choose between human vs human and computer vs human
+2. Computer vs human has 3 levels
+3. In easy level, after player 01 (human) makes their move, the computer randomly chooses an index as its move.
+4. if that index is already occupied, it goes for another random index/
+
 Version 1.2 (computer vs human - MEDIUM)
 Version 1.3 (computer vs human - DIFFICULT)
